@@ -35,33 +35,38 @@ class MygirlJokeSpider(scrapy.Spider):
     def parse_content(self, response):
         Laugh_Selector = response.xpath('.//div[@class="article block untagged noline mb15"]')
         Laugh_Content_List = Laugh_Selector.xpath('.//div[@class="content"]/text()').extract()
-        Laugh_Img_Pic = Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src').extract()[0] or ''
-        Laugh_Img = "https:" + str(Laugh_Img_Pic)
+        if(Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src')):
+            Laugh_Img_Pic = Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src').extract()[0]
+            Laugh_Img = "https:" + str(Laugh_Img_Pic)
+        # else:
+        #     Laugh_Img = "http://m.qpic.cn/psb?/V10cP5hg0dYCOp/O*RB0U6KNzJ583NXa34y*EZDKjNIjGLxYYW57U1xK2U!/b/dCIBAAAAAAAA&bo=WAIgAwAAAAARF1k!&rf=viewer_4"
         for Laugh_Content_Single in Laugh_Content_List:
-            Laugh_Content = ''.join(Laugh_Content_Single).encode('utf-8')
+            Laugh_Content = ''.join(Laugh_Content_Single)
         today = datetime.datetime.today()
         anniversary = datetime.datetime(2018, 3, 14)
         loving_days = (today - anniversary).days
-        print(type(Laugh_Img))
-        if (Laugh_Img_Pic and len(Laugh_Img_Pic)!= 0):
+        if (Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src')):
             lst = [
                 '<html><body><h3>你好, 呆瓜:<br><br></h3>' + 
                 '<h4>今天是' +  today.strftime('%Y-%m-%d') +':<br></h4>' + 
                 '<h4>首先，今天已经是我们相恋的第' + str(loving_days) + '天了喔。然后大兵就要为你带来欢声笑语了！！</h4>' +
-                '<h4>今日笑话内容:<br>' + Laugh_Content + '<br></h4>' +
+                '<h4>今日笑话内容:<br>' + Laugh_Content.encode('utf-8') + '<br></h4>' +
                 '<img src=' + str(Laugh_Img) +'><br><br>' +
+                '<h4>爱你呦！！！</h4>'
                 '</body></html>']
         else:
             lst = ['<html><body><h3>你好, 呆瓜:<br><br></h3>' + 
                 '<h4>今天是' +  today.strftime('%Y-%m-%d') +':<br></h4>' + 
                 '<h4>首先，今天已经是我们相恋的第' + str(loving_days) + '天了喔。然后大兵就要为你带来欢声笑语了！！</h4>' +
-                '<h4>今日笑话内容:<br>' + Laugh_Content + '<br></h4>' +
+                '<h4>今日笑话内容:<br>' + Laugh_Content.encode('utf-8') + '<br></h4>' +
+                '<h4>爱你呦！！！</h4>'
                 '</body></html>']
             
         mailto_list = "***********@qq.com"
         mail_host = "smtp.qq.com"
         mail_user = "***********@qq.com"
         mail_pass = "**************"
+
         
         content = ''.join(lst)
         msg = MIMEText(content, _subtype='html', _charset='utf-8')
