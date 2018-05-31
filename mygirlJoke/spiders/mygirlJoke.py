@@ -35,11 +35,10 @@ class MygirlJokeSpider(scrapy.Spider):
     def parse_content(self, response):
         Laugh_Selector = response.xpath('.//div[@class="article block untagged noline mb15"]')
         Laugh_Content_List = Laugh_Selector.xpath('.//div[@class="content"]/text()').extract()
-        if(Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src')):
+        if (Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src')):
             Laugh_Img_Pic = Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src').extract()[0]
             Laugh_Img = "https:" + str(Laugh_Img_Pic)
-        # else:
-        #     Laugh_Img = "http://m.qpic.cn/psb?/V10cP5hg0dYCOp/O*RB0U6KNzJ583NXa34y*EZDKjNIjGLxYYW57U1xK2U!/b/dCIBAAAAAAAA&bo=WAIgAwAAAAARF1k!&rf=viewer_4"
+
         for Laugh_Content_Single in Laugh_Content_List:
             Laugh_Content = ''.join(Laugh_Content_Single)
         today = datetime.datetime.today()

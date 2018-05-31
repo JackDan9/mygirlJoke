@@ -43,6 +43,10 @@ C:\projects\workspace\mygirlJoke>scrapy crawl mygirlJoke
 - Spider the most funny data.
 - The `New_Joke_Url` for "查看全文".
 
+##Result
+
+![result][4]
+
 ## Thanks
 - If you like it, please give me a **star**!
 - This will support me to keep updating!
@@ -51,3 +55,4 @@ C:\projects\workspace\mygirlJoke>scrapy crawl mygirlJoke
   [1]: https://github.com/lianghonglei
   [2]: https://www.python.org/downloads/release/python-2714/
   [3]: ./images/description.png "description.png"
+  [4]: ./images/result.png "result.png"
