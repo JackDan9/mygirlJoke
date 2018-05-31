@@ -45,6 +45,20 @@ C:\projects\workspace\mygirlJoke>scrapy crawl mygirlJoke
 
 ------
 
+## SetEmailInfo
+```
+# It is receiver email word.
+mailto_list = "*********@qq.com"
+mail_host = "smtp.qq.com"
+# It is your email word.
+mail_user = "********@qq.com"
+# It is your password
+mail_pass = "**********"
+```
+- These are your own email parameters
+
+------
+
 ## Result
 
 ![result][4]
