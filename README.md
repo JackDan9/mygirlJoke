@@ -43,7 +43,9 @@ C:\projects\workspace\mygirlJoke>scrapy crawl mygirlJoke
 - Spider the most funny data.
 - The `New_Joke_Url` for "查看全文".
 
-##Result
+------
+
+## Result
 
 ![result][4]
 
