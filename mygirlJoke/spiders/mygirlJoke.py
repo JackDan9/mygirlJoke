@@ -10,6 +10,10 @@ from email.mime.text import MIMEText
 from email.header import Header
 from scrapy.http import Request
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 class MygirlJokeSpider(scrapy.Spider):
     name="mygirlJoke"
     start_urls = [
@@ -40,7 +44,6 @@ class MygirlJokeSpider(scrapy.Spider):
         if (Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src')):
             Laugh_Img_Pic = Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src').extract()[0]
             Laugh_Img = "https:" + str(Laugh_Img_Pic)
-
         Laugh_Content = ''.join(Laugh_Content_List)
 
         today = datetime.datetime.today()
@@ -52,34 +55,39 @@ class MygirlJokeSpider(scrapy.Spider):
 
         if (Laugh_Selector.xpath('.//div[@class="thumb"]/img/@src')):
             lst = [
-                '<html><body><h3>你好, 呆瓜:<br><br></h3>' +
-                '<h4>今天是' +  today.strftime('%Y-%m-%d') + ':<br></h4>' +
-                '<h4>首先，今天已经是我们相恋的第' + str(loving_days) + '天了喔。然后大兵就要为你带来欢声笑语了！！</h4>' +
-                '<h4>今日笑话内容:<br>' + Laugh_Content_After_String + '<br></h4>' +
-                '<img src=' + str(Laugh_Img) +'><br><br>' +
-                '<h4>爱你呦！！！</h4>'
+                '<html><body>' +
+                '<h3 style="font-family: cursive; font-weight: 500; font-size: 1，17em;">你好, 呆瓜:<br><br></h3>' +
+                '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今天是' + today.strftime('%Y-%m-%d') + ':<br></h4>' +
+                '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">首先，今天已经是我们相恋的第' + str(loving_days) + '天了喔。然后大兵就要为你带来欢声笑语了！！</h4>' +
+                '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今日笑话内容:<br>' + Laugh_Content_After_String + '<br></h4>' +
+                '<img src="' + str(Laugh_Img) + '"><br><br>' +
+                '<h4 style="font-family: cursive; font-weight: 300; color: red; font-size: 1em;">爱你呦！！！</h4>'
                 '</body></html>']
         else:
-            lst = ['<html><body><h3>你好, 呆瓜:<br><br></h3>' +
-                '<h4>今天是' +  today.strftime('%Y-%m-%d') +':<br></h4>' +
-                '<h4>首先，今天已经是我们相恋的第' + str(loving_days) + '天了喔。然后大兵就要为你带来欢声笑语了！！</h4>' +
-                '<h4>今日笑话内容:<br>' + Laugh_Content_After_String + '<br></h4>' +
-                '<h4>爱你呦！！！</h4>'
+            lst = [
+                '<html><body>' +
+                '<h3 style="font-family: cursive; font-weight: 500; font-size: 1，17em;">你好, 呆瓜:<br><br></h3>' +
+                '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今天是' + today.strftime('%Y-%m-%d') +
+                ':<br></h4>' + '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">首先，今天已经是我们相恋的第' + str(loving_days) +
+                '天了喔。然后大兵就要为你带来欢声笑语了！！</h4>' +
+                '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今日笑话内容:<br>' + Laugh_Content_After_String +
+                '<br></h4><br><br>' +
+                '<h4 style="font-family: cursive; font-weight: 300; color: red; font-size: 1em;">爱你呦！！！</h4>' +
                 '</body></html>']
 
-            # # It is receiver email word.
-            # mailto_list = "*********@qq.com"
-            # mail_host = "smtp.qq.com"
-            # # It is your email word.
-            # mail_user = "********@qq.com"
-            # # It is your password
-            # mail_pass = "**********"
+        # It is receiver email word.
+        mailto_list = "*********@qq.com"
+        mail_host = "smtp.qq.com"
+        # It is your email word.
+        mail_user = "********@qq.com"
+        # It is your password
+        mail_pass = "**********"
 
         content = ''.join(lst)
         msg = MIMEText(content, _subtype='html', _charset='utf-8')
         msg['From'] = mail_user
         msg['To'] = mailto_list
-        msg['Subject'] = Header('大兵男朋友的笑话', 'utf-8')
+        msg['Subject'] = Header('大兵男朋友的每日笑话提供', 'utf-8')
         try:
             # s = smtplib.SMTP_SSL(mail_host, 465)
             s = smtplib.SMTP_SSL(mail_host, 465)
