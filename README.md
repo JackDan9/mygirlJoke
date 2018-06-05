@@ -71,4 +71,4 @@ mail_pass = "**********"
   [1]: https://github.com/lianghonglei
   [2]: https://www.python.org/downloads/release/python-2714/
   [3]: ./images/description.png "description.png"
-  [4]: ./images/result.png "result.png"
+  [4]: ./images/result.jpg "result.jpg"
