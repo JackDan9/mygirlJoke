@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+'''
+Name: mygirlJoke_english
+Author: JackDan
+Date: 2018-09-03 17:12
+'''
+
 import scrapy
 
 import smtplib
