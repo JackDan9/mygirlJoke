@@ -78,13 +78,14 @@ class MygirlJokeSpider(scrapy.Spider):
         # It is receiver email word.
         mailto_list = "*********@qq.com"
         mail_host = "smtp.qq.com"
-        # It is your email word.
+        # It is your email word.z
         mail_user = "********@qq.com"
         # It is your password
         mail_pass = "**********"
 
         content = ''.join(lst)
         msg = MIMEText(content, _subtype='html', _charset='utf-8')
+        print(content)
         msg['From'] = mail_user
         msg['To'] = mailto_list
         msg['Subject'] = Header('大兵男朋友的每日笑话提供', 'utf-8')
