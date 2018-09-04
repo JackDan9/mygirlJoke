@@ -21,9 +21,9 @@ C:\projects>cd workspace
 C:\projects\workspace>
 
 ## git clone project
-C:\projects\workspace>git clonegit@github.com:JackDan9/mygirlJoke.git
+C:\projects\workspace>git clone git@github.com:JackDan9/mygirlJoke.git
 or
-C:\projects\workspace>git https://github.com/JackDan9/mygirlJoke.git
+C:\projects\workspace>git clone https://github.com/JackDan9/mygirlJoke.git
 
 ## run project
 Go to the project directory and run the project. like this:
@@ -63,6 +63,83 @@ mail_pass = "**********"
 
 ![result][4]
 
+------
+
+## mygirlJoke_english
+- This project is for mygirl's English exam.
+- Daily English practice
+
+------
+
+## SetUp
+```bash
+## Install Python-IDE
+python 2.7.14
+
+## Install Scrapy
+### upgrade pip
+python -m pip install --upgrade pip
+pip install Scrapy
+
+## store project
+Go to the directory where you want to store the project. like this:
+C:> cd projects
+C:\projects>cd workspace
+C:\projects\workspace>
+
+## git clone project
+C:\projects\workspace>git clone git@github.com:JackDan9/mygirlJoke.git
+or
+C:\projects\workspace>git clone https://github.com/JackDan9/mygirlJoke.git
+
+## run project
+Go to the project directory and run the project. like this:
+C:\projects\workspace>cd mygirlJoke
+C:\projects\workspace\mygirlJoke>git checkout mygirlJoke_english
+C:\projects\workspace\mygirlJoke>scrapy crawl mygirlJoke
+```
+
+-----
+
+## Description
+
+![description][5]
+
+- Spider Daily English data.
+- The `Sub_Selector_Link_Address` for "查看全文".
+
+------
+
+## SetEmailInfo
+```
+# It is receiver email word.
+mailto_list = "*********@qq.com"
+mail_host = "smtp.qq.com"
+# It is your email word.
+mail_user = "********@qq.com"
+# It is your password
+mail_pass = "**********"
+```
+- These are your own email parameters
+
+------
+
+## label
+
+![all_type_labels][6]
+
+- There are all labels.
+
+------
+
+## Result
+
+![english_result][7]
+
+------
+
+
+
 ## Thanks
 - If you like it, please give me a **star**!
 - This will support me to keep updating!
@@ -72,3 +149,6 @@ mail_pass = "**********"
   [2]: https://www.python.org/downloads/release/python-2714/
   [3]: ./images/description.png "description.png"
   [4]: ./images/result.jpg "result.jpg"
+  [5]: ./images/description.png "description.png"
+  [6]: ./images/mygirl_english_label.png "mygirl_english_label.png"
+  [7]: ./images/mygirlJoke_english.jpg "mygirlJoke_english.jpg"
