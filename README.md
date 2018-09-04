@@ -106,7 +106,7 @@ C:\projects\workspace\mygirlJoke>scrapy crawl mygirlJoke
 ![english_description][5]
 
 - Spider Daily English data.
-- The `Sub_Selector_Link_Address` for "查看全文".
+- The `Sub_Selector_Link_Address` for **Daily English** details.
 
 ------
 
