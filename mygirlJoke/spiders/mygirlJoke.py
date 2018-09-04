@@ -152,7 +152,7 @@ class MygirlJokeSpider(scrapy.Spider):
                 loving_days) +
             '天了喔。然后大兵就要为你英语每日一句了！！</h4>' +
             '<img style="width: 620px;" src="' + str(picture_url) + '"><br>' +
-            '<h4 style="font-family: PingFangSC-Medium, sans-serif;; font-weight: 300; font-size: 1em;">今日每日一句内容:<br>' + content +
+            '<h4 style="font-family: PingFangSC-Medium, sans-serif; font-weight: 300; font-size: 1em;">今日每日一句内容:<br>' + content +
             '<br></h4><br>' +
             '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今日每日一句内容翻译:<br>' + note +
             '<br></h4><br>' +
