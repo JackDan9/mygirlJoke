@@ -34,11 +34,13 @@ C:\projects\workspace\mygirlJoke>git checkout mygirlJoke_english
 C:\projects\workspace\mygirlJoke>scrapy crawl mygirlJoke
 ```
 
+- [python-2.7.14][1]
+
 -----
 
 ## Description
 
-![english_description][5]
+![english_description][2]
 
 - Spider Daily English data.
 - The `Sub_Selector_Link_Address` for **Daily English** details.
@@ -61,7 +63,7 @@ mail_pass = "**********"
 
 ## label
 
-![all_type_labels][6]
+![all_type_labels][3]
 
 - There are all labels.
 
@@ -69,7 +71,7 @@ mail_pass = "**********"
 
 ## Result
 
-![english_result][7]
+![english_result][4]
 
 ------
 
@@ -80,10 +82,7 @@ mail_pass = "**********"
 - This will support me to keep updating!
 
 
-  [1]: https://github.com/lianghonglei
-  [2]: https://www.python.org/downloads/release/python-2714/
-  [3]: ./images/description.png "description.png"
-  [4]: ./images/result.jpg "result.jpg"
-  [5]: ./images/english_description.png "english_description.png"
-  [6]: ./images/mygirl_english_label.png "mygirl_english_label.png"
-  [7]: ./images/mygirlJoke_english.jpg "mygirlJoke_english.jpg"
+  [1]: https://www.python.org/downloads/release/python-2714/
+  [2]: ./images/english_description.png "english_description.png"
+  [3]: ./images/mygirl_english_label.png "mygirl_english_label.png"
+  [4]: ./images/mygirlJoke_english.jpg "mygirlJoke_english.jpg"
