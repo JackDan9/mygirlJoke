@@ -39,12 +39,16 @@ class MygirlJokeSpider(scrapy.Spider):
         '''
         Sub_Selector = response.xpath('.//div[@id="content"]/div[@class="main fl"]/ul[@class="tagList clear"]/li[1]/div[1]/a/@href').extract()
         Sub_Selector_Link = ''.join(Sub_Selector)
+
         Id = Sub_Selector_Link[43:47]
+
         random_day = random.randint(1, 1000)
         time_now = (datetime.datetime.now() - datetime.timedelta(days = random_day))
         timestramp = int(time.mktime(time_now.timetuple()))
         timestramp_old = timestramp - 1000
+
         Sub_Selector_Link_Address = 'http://sentence.iciba.com/index.php?callback=jQuery19009826799941931723_' + str(timestramp_old) + '&c=dailysentence&m=getdetail&sid=' + Id + '&_=' + str(timestramp)
+
         yield Request(
             url=Sub_Selector_Link_Address,
             callback=self.parse_content
