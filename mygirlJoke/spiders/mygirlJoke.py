@@ -27,8 +27,67 @@ sys.setdefaultencoding('utf8')
 
 class MygirlJokeSpider(scrapy.Spider):
     name="mygirlJoke"
+    id_num = random.randint(4, 33)
+    if (id_num == 6):
+        page_number = random.randint(1, 7)
+    elif (id_num ==  4):
+        page_number = random.randint(1, 21)
+    elif (id_num == 5):
+        page_number = random.randint(1, 8)
+    elif (id_num == 7):
+        page_number = random.randint(1, 4)
+    elif (id_num == 8):
+        page_number = random.randint(1, 2)
+    elif (id_num == 9):
+        page_number = random.randint(1, 12)
+    elif (id_num == 10):
+        page_number = random.randint(1, 40)
+    elif (id_num == 11):
+        page_number = random.randint(1, 4)
+    elif (id_num == 12):
+        page_number = random.randint(1, 6)
+    elif (id_num == 13):
+        page_number = random.randint(1, 29)
+    elif (id_num == 14):
+        page_number = random.randint(1, 18)
+    elif (id_num == 15):
+        page_number = random.randint(1, 3)
+    elif (id_num == 16):
+        page_number = random.randint(1, 29)
+    elif (id_num == 17):
+        page_number = random.randint(1, 4)
+    elif (id_num == 24):
+        page_number = random.randint(1, 4)
+    elif (id_num == 19):
+        page_number = random.randint(1, 3)
+    elif (id_num == 20):
+        page_number = random.randint(1, 9)
+    elif (id_num == 21):
+        page_number = 1
+    elif (id_num == 22):
+        page_number = 1
+    elif (id_num == 23):
+        page_number = random.randint(1, 4)
+    elif (id_num == 25):
+        page_number = random.randint(1, 2)
+    elif (id_num == 26):
+        page_number = 1
+    elif (id_num == 27):
+        page_number = random.randint(1, 2)
+    elif (id_num == 28):
+        page_number = 1
+    elif (id_num == 29):
+        page_number = random.randint(1, 2)
+    elif (id_num == 30):
+        page_number = 1
+    elif (id_num == 31):
+        page_number = random.randint(1, 6)
+    elif (id_num == 32):
+        page_number = random.randint(1, 3)
+    elif (id_num == 33):
+        page_number = random.randint(1, 6)
     start_urls = [
-        "http://news.iciba.com/appv3/wwwroot/ds.php?action=tags&id={}".format(random.randint(4, 32)),
+        "http://news.iciba.com/appv3/wwwroot/ds.php?action=tags&id={}".format(id_num) + "&ob=1&order=2&page={}".format(page_number),
     ]
 
     def parse(self, response):
@@ -37,7 +96,10 @@ class MygirlJokeSpider(scrapy.Spider):
         :param response:
         :return:
         '''
-        Sub_Selector = response.xpath('.//div[@id="content"]/div[@class="main fl"]/ul[@class="tagList clear"]/li[1]/div[1]/a/@href').extract()
+        Sub_Selector_List = response.xpath('.//div[@id="content"]/div[@class="main fl"]/ul[@class="tagList clear"]/li')
+        Li_List_Num = len(Sub_Selector_List)
+        Li_Num = random.randint(1, Li_List_Num)
+        Sub_Selector = response.xpath('.//div[@id="content"]/div[@class="main fl"]/ul[@class="tagList clear"]/li[' + str(Li_Num) + ']/div[1]/a/@href').extract()
         Sub_Selector_Link = ''.join(Sub_Selector)
 
         Id = Sub_Selector_Link[43:47]
