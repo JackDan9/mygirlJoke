@@ -144,6 +144,8 @@ class MygirlJokeSpider(scrapy.Spider):
         loving_days = (today - anniversary).days
         loving_word = '爱你呦！！！'
 
+        default_img_url = 'http://b289.photo.store.qq.com/psb?/V10cP5hg0dYCOp/uOI7e77iET6v5HXPF2T0FDXnPnFOiDek91qWxZDd3aQ!/b/dCEBAAAAAAAA&bo=0AIABQAAAAARB.c!&rf=viewer_4'
+
         lst = [
             '<html><body>' +
             '<h3 style="font-family: cursive; font-weight: 500; font-size: 1，17em;">你好, 呆瓜:<br><br></h3>' +
@@ -151,7 +153,7 @@ class MygirlJokeSpider(scrapy.Spider):
             ':<br></h4>' + '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">首先，今天已经是我们相恋的第' + str(
                 loving_days) +
             '天了喔。然后大兵就要为你英语每日一句了！！</h4>' +
-            '<img style="width: 620px;" src="' + str(picture_url) + '"><br>' +
+            '<img style="width: 620px;" src="' + str(picture_url) + '" onerror= "' + default_img_url + '"><br>' +
             '<h4 style="font-family: PingFangSC-Medium, sans-serif; font-weight: 300; font-size: 1em;">今日每日一句内容:<br>' + content +
             '<br></h4><br>' +
             '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今日每日一句内容翻译:<br>' + note +
