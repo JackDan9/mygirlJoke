@@ -103,7 +103,7 @@ C:\projects\workspace\mygirlJoke>scrapy crawl mygirlJoke
 
 ## Description
 
-![description][5]
+![english_description][5]
 
 - Spider Daily English data.
 - The `Sub_Selector_Link_Address` for "查看全文".
@@ -149,6 +149,6 @@ mail_pass = "**********"
   [2]: https://www.python.org/downloads/release/python-2714/
   [3]: ./images/description.png "description.png"
   [4]: ./images/result.jpg "result.jpg"
-  [5]: ./images/description.png "description.png"
+  [5]: ./images/english_description.png "english_description.png"
   [6]: ./images/mygirl_english_label.png "mygirl_english_label.png"
   [7]: ./images/mygirlJoke_english.jpg "mygirlJoke_english.jpg"
