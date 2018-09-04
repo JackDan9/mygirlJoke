@@ -27,6 +27,7 @@ sys.setdefaultencoding('utf8')
 
 class MygirlJokeSpider(scrapy.Spider):
     name="mygirlJoke"
+
     id_num = random.randint(4, 33)
     if (id_num == 6):
         page_number = random.randint(1, 7)
@@ -86,6 +87,7 @@ class MygirlJokeSpider(scrapy.Spider):
         page_number = random.randint(1, 3)
     elif (id_num == 33):
         page_number = random.randint(1, 6)
+
     start_urls = [
         "http://news.iciba.com/appv3/wwwroot/ds.php?action=tags&id={}".format(id_num) + "&ob=1&order=2&page={}".format(page_number),
     ]
@@ -150,7 +152,7 @@ class MygirlJokeSpider(scrapy.Spider):
                 loving_days) +
             '天了喔。然后大兵就要为你英语每日一句了！！</h4>' +
             '<img style="width: 620px;" src="' + str(picture_url) + '"><br>' +
-            '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今日每日一句内容:<br>' + content +
+            '<h4 style="font-family: PingFangSC-Medium, sans-serif;; font-weight: 300; font-size: 1em;">今日每日一句内容:<br>' + content +
             '<br></h4><br>' +
             '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今日每日一句内容翻译:<br>' + note +
             '<br></h4><br>' +
