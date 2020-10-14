@@ -17,6 +17,9 @@ import json
 
 import random
 
+import httplib
+import urlparse
+
 from email.mime.text import MIMEText
 from email.header import Header
 from scrapy.http import Request
@@ -27,7 +30,7 @@ sys.setdefaultencoding('utf8')
 
 class MygirlJokeSpider(scrapy.Spider):
     name="mygirlJoke"
-
+    '''
     id_num = random.randint(4, 33)
     if (id_num == 6):
         page_number = random.randint(1, 7)
@@ -87,9 +90,14 @@ class MygirlJokeSpider(scrapy.Spider):
         page_number = random.randint(1, 3)
     elif (id_num == 33):
         page_number = random.randint(1, 6)
+    '''
+    date_today = datetime.datetime.today().strftime('%Y-%m-%d')
 
     start_urls = [
-        "http://news.iciba.com/appv3/wwwroot/ds.php?action=tags&id={}".format(id_num) + "&ob=1&order=2&page={}".format(page_number),
+        # "http://news.iciba.com/appv3/wwwroot/ds.php?action=tags&id={}".format(id_num) + "&ob=1&order=2&page={}".format(page_number),
+        # "http://news.iciba.com/views/dailysentence/daily.html#!/detail/title/2019-06-14",
+        # "http://news.iciba.com/views/dailysentence/daily.html?_escaped_fragment_=%2Fdetail%2Ftitle%2F2019-06-14#!/detail/title/2019-06-14",
+        "http://sentence.iciba.com/index.php?callback=jQuery190012461297762232992_1560583495547&c=dailysentence&m=getdetail&title={}".format(date_today) + "&_=1560583495548"
     ]
 
     def parse(self, response):
@@ -97,13 +105,17 @@ class MygirlJokeSpider(scrapy.Spider):
         Get the request new url
         :param response:
         :return:
+        '''       
+        # content_container = response.xpath('.//div[@class="container"]/div[@class="container-left"]/div[@class="detail"]/div[@class="detail-box"]')
+        content_data = json.loads(response.body[42:][:-1])
+
         '''
         Sub_Selector_List = response.xpath('.//div[@id="content"]/div[@class="main fl"]/ul[@class="tagList clear"]/li')
         Li_List_Num = len(Sub_Selector_List)
         Li_Num = random.randint(1, Li_List_Num)
         Sub_Selector = response.xpath('.//div[@id="content"]/div[@class="main fl"]/ul[@class="tagList clear"]/li[' + str(Li_Num) + ']/div[1]/a/@href').extract()
         Sub_Selector_Link = ''.join(Sub_Selector)
-
+ 
         Id = Sub_Selector_Link[43:47]
 
         random_day = random.randint(1, 1000)
@@ -117,14 +129,16 @@ class MygirlJokeSpider(scrapy.Spider):
             url=Sub_Selector_Link_Address,
             callback=self.parse_content
         )
+        '''
 
-    def parse_content(self, response):
+        # def parse_content(self, response):
         '''
         Get The Data Of Sub_Selector_Links
         :param response:
         :return:
         '''
 
+        '''
         body = response.body
 
         len_before = 38
@@ -136,8 +150,32 @@ class MygirlJokeSpider(scrapy.Spider):
 
         content = data_body_json["content"]
         note = data_body_json["note"]
-        picture_url = data_body_json["picture"]
+        picture = data_body_json["picture"]
+
+        host, path = urlparse.urlsplit(str(picture))[1:3]
+        connection = httplib.HTTPConnection(host)
+        connection.request("HEAD", path)
+        response_object = connection.getresponse()
+        if (response_object.status == 404):
+            picture_url = 'http://b289.photo.store.qq.com/psb?/V10cP5hg0dYCOp/uOI7e77iET6v5HXPF2T0FDXnPnFOiDek91qWxZDd3aQ!/b/dCEBAAAAAAAA&bo=0AIABQAAAAARB.c!&rf=viewer_4'
+        else:
+            picture_url = picture
+
         mp3_url = data_body_json["tts"]
+        '''
+        random_picture_num = random.randint(1, 3)
+        if random_picture_num == 1:
+            picture_url = content_data['picture']
+        elif random_picture_num == 2:
+            picture_url = content_data['picture2']
+        else:
+            picture_url = content_data['picture3']
+        
+        content = content_data['content']
+
+        note = content_data['note']
+
+        mp3_url = content_data['tts']
 
         today = datetime.datetime.today()
         anniversary = datetime.datetime(2018, 3, 14)
@@ -146,7 +184,7 @@ class MygirlJokeSpider(scrapy.Spider):
 
         lst = [
             '<html><body>' +
-            '<h3 style="font-family: cursive; font-weight: 500; font-size: 1，17em;">你好, 呆瓜:<br><br></h3>' +
+            '<h3 style="font-family: cursive; font-weight: 500; font-size: 1，17em;">你好, 宝贝:<br><br></h3>' +
             '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">今天是' + today.strftime('%Y-%m-%d') +
             ':<br></h4>' + '<h4 style="font-family: cursive; font-weight: 300; font-size: 1em;">首先，今天已经是我们相恋的第' + str(
                 loving_days) +
@@ -159,16 +197,24 @@ class MygirlJokeSpider(scrapy.Spider):
             '<audio controls="controls" height="100" width="100"> <source src="' + str(mp3_url) +
             '" type="audio/mp3"/><embed height="100" width="100" src="' + str(mp3_url) +
             '"/></audio><br><br>' +
-            '<h4 style="font-family: cursive; font-weight: 300; color: red; font-size: 1em;">' + loving_word + '</h4>' +
+            '<h4 style="font-family: cursive; font-weight: 300; color: red; font-size: 1em;">' + loving_word +
+            '<img src="https://rescdn.qqmail.com/zh_CN/images/mo/DEFAULT2/66.gif">' +
+            '<img src="https://rescdn.qqmail.com/zh_CN/images/mo/DEFAULT2/65.gif">' +
+            '<img src="https://rescdn.qqmail.com/zh_CN/images/mo/DEFAULT2/66.gif">' +
+            '<img src="https://rescdn.qqmail.com/zh_CN/images/mo/DEFAULT2/52.gif">' +
+            '<img src="https://rescdn.qqmail.com/zh_CN/images/mo/DEFAULT2/65.gif">' +
+            '<img src="https://rescdn.qqmail.com/zh_CN/images/mo/DEFAULT2/52.gif">' +
+            '</h4>' +
             '</body></html>']
 
         # It is receiver email word.
-        mailto_list = "************@qq.com"
+        mailto_list = "1835812864@qq.com"
         mail_host = "smtp.qq.com"
         # It is your email word.z
-        mail_user = "***********@qq.com"
+        mail_user = "1835812864@qq.com"
         # It is your password
-        mail_pass = "*************"
+        # mail_pass = "mywwyiohmeopdfdd"
+        mail_pass = "cpnpivburwnvfaec"
 
         content = ''.join(lst)
         msg = MIMEText(content, _subtype='html', _charset='utf-8')
